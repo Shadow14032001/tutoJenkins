@@ -20,7 +20,7 @@ pipeline {
         //}
              //Faire un pull en premier lieu
         
-        stage('init npm') {
+        stage('npm') {
             steps {
                 sh '''
                 cd ./tutoJenkins/
@@ -28,18 +28,18 @@ pipeline {
                  '''
             }
         }
-        stage('run develop') {
+        stage('develop') {
             steps {
                 echo "Run develop version"
                 sh '''console.log("Hello World!")'''  
             }     
         }
-        stage('jest installs') {
+        stage('jest') {
             steps {
                 sh 'npm install --save-dev jest'
             }
         }
-        stage('tests develop') {
+        stage('test') {
             steps {
                 sh 'npx jest'
             }
