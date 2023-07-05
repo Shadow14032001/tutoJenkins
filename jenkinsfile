@@ -83,6 +83,7 @@ pipeline {
             steps {
                 echo 'Deliver....'
                 sh '''
+                cd tutoJenkins
                 node Main.js
                 '''
             }
