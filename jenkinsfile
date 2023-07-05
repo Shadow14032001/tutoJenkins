@@ -1,0 +1,23 @@
+node {
+    stage('clone') {
+        git 'https://github.com/priximmo/jenkins-helloworld.git' //Faire un pull en premier lieu
+    }
+    stage('run develop') {
+
+    }
+    stage('tests develop') {
+
+    }
+    stage('build') {
+        sh '''javac Main.java'''
+    }
+    stage('deploy') {
+        (version production)
+    }
+    stage('run') {
+        sh '''java Main'''
+    }
+    stage('test production') {
+        
+    }
+}
