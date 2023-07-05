@@ -1,23 +1,63 @@
-node {
-    stage('clone') {
-        git 'https://github.com/priximmo/jenkins-helloworld.git' //Faire un pull en premier lieu
-    }
-    stage('run develop') {
+pipeline {
 
-    }
-    stage('tests develop') {
+    agent any
 
-    }
-    stage('build') {
-        sh '''javac Main.java'''
-    }
-    stage('deploy') {
-        (version production)
-    }
-    stage('run') {
-        sh '''java Main'''
-    }
-    stage('test production') {
+    stages {
+        stage('pull') {
+            steps {
+                echo "Pull"
+                sh ''' 
+                echo "Pull before cloning"
+                    '''
+                git 'pull'
+                
+            }
+        // stage('clone') {
+        //     steps {
+        //         echo "Clone"
+        //         git 'https://github.com/Shadow14032001/tutoJenkins.git'
+        //     }
+        }
+             //Faire un pull en premier lieu
         
+        stage('init npm') {
+            steps {
+                sh '''
+                npm init
+                 '''
+            }
+        }
+        stage('run develop') {
+            steps {
+                echo "Run develop version"
+                sh '''console.log("Hello World!")'''  
+            }     
+        }
+        stage('jest installs') {
+            steps {
+                sh 'npm install --save-dev jest'
+            }
+        }
+        stage('tests develop') {
+            steps {
+                sh 'npx jest'
+            }
+        }
+        // stage('build') {
+        //     // sh '''javac Main.java'''
+        //     sh 'node Main.js'
+        // }
+        // stage('deploy') {
+        //     (version production)
+        // }
+        stage('run') {
+            steps {
+                sh 'node Main.js'
+            }
+            // sh '''java Main'''
+        }
+        // stage('test production') {
+        
+        // }
     }
 }
