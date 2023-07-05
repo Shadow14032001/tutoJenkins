@@ -3,26 +3,27 @@ pipeline {
     agent any
 
     stages {
-        stage('pull') {
-            steps {
-                echo "Pull"
-                sh ''' 
-                echo "Pull before cloning"
-                    '''
-                git 'pull'
+        // stage('pull') {
+        //     steps {
+        //         echo "Pull"
+        //         sh ''' 
+        //         echo "Pull before cloning"
+        //             '''
+        //         git 'pull'
                 
-            }
+        //     }
         // stage('clone') {
         //     steps {
         //         echo "Clone"
         //         git 'https://github.com/Shadow14032001/tutoJenkins.git'
         //     }
-        }
+        //}
              //Faire un pull en premier lieu
         
         stage('init npm') {
             steps {
                 sh '''
+                cd ./tutoJenkins/
                 npm init
                  '''
             }
