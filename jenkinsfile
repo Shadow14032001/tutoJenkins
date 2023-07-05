@@ -3,62 +3,89 @@ pipeline {
     agent any
 
     stages {
-        // stage('pull') {
-        //     steps {
-        //         echo "Pull"
-        //         sh ''' 
-        //         echo "Pull before cloning"
-        //             '''
-        //         git 'pull'
+        // // stage('pull') {
+        // //     steps {
+        // //         echo "Pull"
+        // //         sh ''' 
+        // //         echo "Pull before cloning"
+        // //             '''
+        // //         git 'pull'
                 
-        //     }
-        // stage('clone') {
-        //     steps {
-        //         echo "Clone"
-        //         git 'https://github.com/Shadow14032001/tutoJenkins.git'
-        //     }
-        //}
-             //Faire un pull en premier lieu
+        // //     }
+        // // stage('clone') {
+        // //     steps {
+        // //         echo "Clone"
+        // //         git 'https://github.com/Shadow14032001/tutoJenkins.git'
+        // //     }
+        // //}
+        //      //Faire un pull en premier lieu
         
-        stage('npm') {
-            steps {
-                sh '''
-                cd ./tutoJenkins/
-                npm init
-                 '''
-            }
-        }
-        stage('develop') {
-            steps {
-                echo "Run develop version"
-                sh '''console.log("Hello World!")'''  
-            }     
-        }
-        stage('jest') {
-            steps {
-                sh 'npm install --save-dev jest'
-            }
-        }
-        stage('test') {
-            steps {
-                sh 'npx jest'
-            }
-        }
-        // stage('build') {
-        //     // sh '''javac Main.java'''
-        //     sh 'node Main.js'
+        // stage('npm') {
+        //     steps {
+        //         sh '''
+        //         cd tutoJenkins
+        //         npm init
+        //          '''
+        //     }
         // }
-        // stage('deploy') {
-        //     (version production)
+        // stage('develop') {
+        //     steps {
+        //         echo "Run develop version"
+        //         sh '''console.log("Hello World!")'''  
+        //     }     
         // }
-        stage('run') {
-            steps {
-                sh 'node Main.js'
-            }
-            // sh '''java Main'''
-        }
+        // stage('jest') {
+        //     steps {
+        //         sh 'npm install --save-dev jest'
+        //     }
+        // }
+        // stage('test') {
+        //     steps {
+        //         sh 'npx jest'
+        //     }
+        // }
+        // // stage('build') {
+        // //     // sh '''javac Main.java'''
+        // //     sh 'node Main.js'
+        // // }
+        // // stage('deploy') {
+        // //     (version production)
+        // // }
+        // stage('run') {
+        //     steps {
+        //         sh 'node Main.js'
+        //     }
+        //     // sh '''java Main'''
+        // }
         // stage('test production') {
         
         // }
+        stage('Build') {
+            steps {
+                echo "Building.."
+                sh '''
+                cd tutoJenkins
+                npm init
+                '''
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "Testing.."
+                sh '''
+                cd tutoJenkins
+                npm install --save-dev jest
+                npx jest
+                '''
+            }
+        }
+        stage('Deliver') {
+            steps {
+                echo 'Deliver....'
+                sh '''
+                node Main.js
+                '''
+            }
+        }
     }
 }
