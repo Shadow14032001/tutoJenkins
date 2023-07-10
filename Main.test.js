@@ -1,6 +1,8 @@
-import {test} from jest;
-const helloWorld = require('./helloWorld');
+// const test = require('jest');
+const helloWorld = require('./Main');
+// const helloWorld = require(helloWorld);
 
 test('Greet test', () => {
-  expect(helloWorld()).toBe('Hello World!');
+  const hello = helloWorld()
+  expect(hello).toBe('Hello World!');
 })
